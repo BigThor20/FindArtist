@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FindArtist</string>
+    <string name="description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis odio ac felis pellentesque mollis. Praesent maximus tellus eget nisi hendrerit, ut bibendum velit facilisis. Etiam auctor, magna vitae feugiat rutrum, nunc libero consectetur ante, id sollicitudin purus ipsum at lorem.</string>
+    <string name="name1">John Doe</string>
+    <string name="name2">Emily Gomez</string>
+    <string name="name3">Gabriel Gomez</string>
+    <string name="name4">Selena Messi</string>
+    <string name="name5">Cristian Doe</string>
+    <string name="name6">Marian Gomez</string>
+    <string name="job1">Graphic Designer</string>
+    <string name="job2">Painter</string>
+    <string name="job3">Musician</string>
+    <string name="rate1">4.3</string>
+    <string name="rate2">3.8</string>
+    <string name="rate3">2.7</string>
+</resources>
