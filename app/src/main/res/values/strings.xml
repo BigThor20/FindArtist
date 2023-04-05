@@ -13,4 +13,23 @@
     <string name="rate1">4.3</string>
     <string name="rate2">3.8</string>
     <string name="rate3">2.7</string>
+
+    <string-array name="industries">
+        <item>Digital art</item>
+        <item>Music</item>
+        <item>Painting</item>
+
+    </string-array>
+    <string-array name="music_jobs">
+        <item>Solist</item>
+        <item>Instrumentist</item>
+    </string-array>
+    <string-array name="dainting_jobs">
+        <item>Pictor portrete</item>
+        <item>Fotograf</item>
+    </string-array>
+    <string-array name="digital_art">
+        <item>Designer 3D</item>
+        <item>Designer web</item>
+    </string-array>
 </resources>

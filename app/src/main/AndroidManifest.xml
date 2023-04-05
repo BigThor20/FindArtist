@@ -20,6 +20,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".views.RegisterTypeActivity"
+            android:label="RegisterType">
+        </activity>
+        <activity
+            android:name=".views.RegisterArtistActivity"
+            android:label="RegisterArtist">
+        </activity>
+        <activity
+            android:name=".views.RegisterUserActivity"
+            android:label="RegisterUser">
+        </activity>
+        <activity
+            android:name=".views.LoginActivity"
+            android:label="Login">
+        </activity>
+        <activity
+            android:name=".views.DiscoverActivity"
+            android:label="Discover">
+        </activity>
+
     </application>
 
 </manifest>
