@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+    <LinearLayout
+        android:id="@+id/artistItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <!-- Profile section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/portfolio_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="profile photo"
+                android:src="@drawable/image1" />
+
+        </LinearLayout>
+
+        <!-- Post content section -->
+        <TextView
+            android:id="@+id/list_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="A short description about the photo" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

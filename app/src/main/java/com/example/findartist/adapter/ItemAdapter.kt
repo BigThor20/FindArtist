@@ -14,16 +14,35 @@ class ItemAdapter(private val context: Context,
                   private val dataset: List<ArtistItemList>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
+    private lateinit var mListener: OnItemClickListener
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        mListener = listener
+    }
+
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
-    class ItemViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+    inner class ItemViewHolder(private val view: View,
+                               private val listener: OnItemClickListener
+                         ): RecyclerView.ViewHolder(view) {
         val profilePhoto: ImageView = view.findViewById(R.id.list_item_profile_photo)
         val artistName: TextView = view.findViewById(R.id.list_item_name)
         val artistJob: TextView = view.findViewById(R.id.list_item_job)
         val artistRate: TextView = view.findViewById(R.id.list_item_rate)
         val artistDescription: TextView = view.findViewById(R.id.list_item_description)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
     }
 
 
@@ -34,7 +53,7 @@ class ItemAdapter(private val context: Context,
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item, parent, false);
 
-        return ItemViewHolder(adapterLayout);
+        return ItemViewHolder(adapterLayout, mListener);
     }
 
     override fun getItemCount() = dataset.size

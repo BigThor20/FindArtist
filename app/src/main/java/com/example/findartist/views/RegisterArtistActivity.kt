@@ -18,7 +18,6 @@ class RegisterArtistActivity : AppCompatActivity() {
             val name = findViewById<EditText>(R.id.editTextName).text.toString()
 
 
-
             if (name.isNotEmpty()) {
                 // Registration logic here
 
