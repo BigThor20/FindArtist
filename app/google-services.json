@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "956757181498",
+    "project_id": "findartists-7dd64",
+    "storage_bucket": "findartists-7dd64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956757181498:android:7de3bf80dbc4db67e1a103",
+        "android_client_info": {
+          "package_name": "com.example.findartist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956757181498-dpbbtnnnkelslm2t630qhq9dl8ktah7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQPu3mI3mROb2ddEJoDYobdzBYIj-FgDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956757181498-dpbbtnnnkelslm2t630qhq9dl8ktah7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

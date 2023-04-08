@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import com.example.findartist.views.LoginActivity
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+
+        //add firebase
+        FirebaseApp.initializeApp(this)
 
         // Enable the ActionBar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
