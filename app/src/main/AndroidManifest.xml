@@ -22,26 +22,32 @@
         </activity>
         <activity
             android:name=".views.RegisterTypeActivity"
+            android:parentActivityName=".views.LoginActivity"
             android:label="RegisterType">
         </activity>
         <activity
             android:name=".views.RegisterArtistActivity"
+            android:parentActivityName=".views.RegisterTypeActivity"
             android:label="RegisterArtist">
         </activity>
         <activity
             android:name=".views.RegisterUserActivity"
-            android:label="RegisterUser">
+            android:label="RegisterUser"
+            android:parentActivityName=".views.RegisterTypeActivity">
         </activity>
         <activity
             android:name=".views.LoginActivity"
+            android:parentActivityName=".MainActivity"
             android:label="Login">
         </activity>
         <activity
             android:name=".views.DiscoverActivity"
+            android:parentActivityName=".views.LoginActivity"
             android:label="Discover">
         </activity>
         <activity
             android:name=".views.ProfileActivity"
+            android:parentActivityName=".views.DiscoverActivity"
             android:label="Profile">
         </activity>
 
