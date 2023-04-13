@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.findartist.R
+import com.example.findartist.model.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+    private val viewModel: LoginViewModel by viewModels()
 
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,30 +33,25 @@ class LoginActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.loginPasswordEditText).text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Authentication logic here
-                val auth = FirebaseAuth.getInstance()
-
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            val intent = Intent(this, DiscoverActivity::class.java)
-                            intent.putExtra("username", email)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this, "Your username or password is not correct", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-
+                viewModel.login(email, password)
             } else {
                 Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_SHORT).show()
             }
         }
 
-
-
-
-
+        viewModel.loginStatus.observe(this, Observer { isLoggedIn ->
+            if (isLoggedIn) {
+                openMainActivity()
+            } else {
+                Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+    private fun openMainActivity() {
+        val intent = Intent(this, DiscoverActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }
