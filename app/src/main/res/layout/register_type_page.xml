@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Artist" />
+        android:text="I'm an artist" />
 
     <TextView
         android:layout_width="match_parent"
@@ -34,6 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Normal User" />
+        android:text="I'm an user" />
 
 </LinearLayout>

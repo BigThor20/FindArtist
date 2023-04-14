@@ -46,6 +46,14 @@ class RegisterUserActivity : AppCompatActivity() {
                 Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.registerStatus.observe(this, Observer { isRegistered ->
+            if (isRegistered) {
+                openLoginActivity()
+            } else {
+                Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun openLoginActivity() {

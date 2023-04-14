@@ -46,6 +46,12 @@ class RegisterArtistActivity : AppCompatActivity() {
                 Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.validationError.observe(this, Observer { validationError ->
+            if (validationError.isNotEmpty()) {
+                Toast.makeText(this, validationError, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun openLoginActivity() {
