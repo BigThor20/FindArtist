@@ -92,21 +92,21 @@
         android:layout_height="wrap_content"
         android:text="Industry"/>
     <Spinner
+        android:id="@+id/industrySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:entries="@array/industries"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Job"/>
     <Spinner
+        android:id="@+id/jobSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginBottom="10dp"
-        android:entries="@array/digital_art"/>
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:id="@+id/registerArtist"

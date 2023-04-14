@@ -2,9 +2,8 @@ package com.example.findartist.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -19,6 +18,33 @@ class RegisterArtistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_artist_page)
+
+        val firstSpinner: Spinner = findViewById(R.id.industrySpinner)
+        val secondSpinner: Spinner = findViewById(R.id.jobSpinner)
+
+        // Obțineți datele de la ViewModel pentru primul spinner
+        viewModel.fetchFirstSpinnerData().observe(this, Observer { firstSpinnerData ->
+            val firstSpinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, firstSpinnerData)
+            firstSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            firstSpinner.adapter = firstSpinnerAdapter
+        })
+
+        firstSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedOption = firstSpinner.selectedItem.toString()
+
+                // Obțineți datele de la ViewModel pentru al doilea spinner
+                viewModel.fetchSecondSpinnerData(selectedOption).observe(this@RegisterArtistActivity, Observer { secondSpinnerData ->
+                    val secondSpinnerAdapter = ArrayAdapter(this@RegisterArtistActivity, android.R.layout.simple_spinner_item, secondSpinnerData)
+                    secondSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    secondSpinner.adapter = secondSpinnerAdapter
+                })
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Nimic de făcut
+            }
+        }
 
         val registerButton = findViewById<Button>(R.id.registerArtist)
         registerButton.setOnClickListener {
