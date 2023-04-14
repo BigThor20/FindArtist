@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.findartist.R
 import com.example.findartist.model.RegisterViewModel
+import com.example.findartist.model.User
+import com.example.findartist.model.UserRole
 
 class RegisterArtistActivity : AppCompatActivity() {
     private val viewModel: RegisterViewModel by viewModels()
@@ -20,12 +22,18 @@ class RegisterArtistActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.registerArtist)
         registerButton.setOnClickListener {
-            val name = findViewById<EditText>(R.id.editTextName).text.toString()
+            val firstName = findViewById<EditText>(R.id.editTextFirstName).text.toString()
+            val lastName = findViewById<EditText>(R.id.editTextLastName).text.toString()
             val mail = findViewById<EditText>(R.id.editTextEmail).text.toString()
             val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
+            val confirmPassword = findViewById<EditText>(R.id.editTextRepeatPassword).text.toString()
+            val city = findViewById<EditText>(R.id.editTextCity).text.toString()
 
-            if (mail.isNotEmpty()) {
-                viewModel.register(mail, password)
+            if (firstName.isNotEmpty() && lastName.isNotEmpty()
+                && mail.isNotEmpty() && password.isNotEmpty()
+                && city.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                val user = User(firstName, lastName, UserRole.ARTIST, mail, city);
+                viewModel.register(user, password, confirmPassword)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
@@ -45,4 +53,5 @@ class RegisterArtistActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }
