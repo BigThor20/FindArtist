@@ -64,13 +64,7 @@ class RegisterViewModel : ViewModel() {
     }
 
     private suspend fun saveUserToFirestore(user: User, userId: String) = withContext(Dispatchers.IO) {
-        val userMap = hashMapOf(
-            "firstName" to user.firstName,
-            "lastName" to user.lastName,
-            "role" to user.role,
-            "email" to user.email,
-            "city" to user.city
-        )
+        val userMap = user.toMap()
         db.collection("users").document(userId).set(userMap).await()
     }
 
