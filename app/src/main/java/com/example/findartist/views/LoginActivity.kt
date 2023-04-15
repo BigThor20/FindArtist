@@ -1,5 +1,6 @@
 package com.example.findartist.views
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle

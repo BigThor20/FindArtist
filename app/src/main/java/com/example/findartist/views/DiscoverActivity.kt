@@ -2,17 +2,18 @@ package com.example.findartist.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findartist.R
 import com.example.findartist.adapter.ItemAdapter
-import com.example.findartist.model.ArtistItemList
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.findartist.model.ArtistCardViewModel
 
 class DiscoverActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+    private val viewModel: ArtistCardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,39 +22,18 @@ class DiscoverActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         recyclerView.setHasFixedSize(true)
 
-        fetchArtistsFromFirestore()
-    }
+        viewModel.fetchArtistsFromFirestore()
 
-    private fun fetchArtistsFromFirestore() {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("users")
-            .whereEqualTo("role", "ARTIST")
-            .get()
-            .addOnSuccessListener { documents ->
-                val artistList = mutableListOf<ArtistItemList>()
-                for (document in documents) {
-                    val artistItem = document.toObject(ArtistItemList::class.java)
-                    artistList.add(artistItem)
+        viewModel.artistList.observe(this, Observer { artistList ->
+            val adapter = ItemAdapter(this, artistList)
+            val intent = Intent(this, ProfileActivity::class.java)
+            recyclerView.adapter = adapter
+
+            adapter.setOnItemClickListener(object : ItemAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    startActivity(intent)
                 }
-
-                val adapter = ItemAdapter(this, artistList)
-                val intent = Intent(this, ProfileActivity::class.java)
-                recyclerView.adapter = adapter
-
-                adapter.setOnItemClickListener(object : ItemAdapter.OnItemClickListener {
-                    override fun onItemClick(position: Int) {
-                        startActivity(intent)
-                    }
-                })
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
+            })
+        })
     }
-
-    companion object {
-        private const val TAG = "DiscoverActivity"
-    }
-
 }
