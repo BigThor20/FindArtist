@@ -64,11 +64,11 @@ class ItemAdapter(private val context: Context,
         val rating = "Rate: ${item.rate}/5"
         val name = item.firstName + " " + item.lastName
         // Utilizați Glide pentru a încărca imaginea de profil de la URL
-//        Glide.with(context)
-//            .load(item.profilePhotoUrl)
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_launcher_foreground) // Puneți o imagine placeholder
-//            .into(holder.profilePhoto)
+        Glide.with(context)
+            .load(item.profilePhotoUrl)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_foreground) // Puneți o imagine placeholder
+            .into(holder.profilePhoto)
         holder.artistName.text = name
         holder.artistJob.text = item.job
         holder.artistRate.text = rating

@@ -74,7 +74,7 @@ class RegisterArtistActivity : AppCompatActivity() {
             if (firstName.isNotEmpty() && lastName.isNotEmpty()
                 && mail.isNotEmpty() && password.isNotEmpty()
                 && city.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                val user = Artist(firstName, lastName, UserRole.ARTIST, mail, city, industry, job);
+                val user = Artist(firstName, lastName, UserRole.ARTIST, mail, city, industry, job, 3.7f, "", "");
                 viewModel.register(user, password, confirmPassword)
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
