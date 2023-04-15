@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.findartist.R
 import com.example.findartist.model.ArtistItemList
 
@@ -24,10 +25,7 @@ class ItemAdapter(private val context: Context,
     }
 
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder.
-    // Each data item is just an Affirmation object.
+
     inner class ItemViewHolder(private val view: View,
                                private val listener: OnItemClickListener
                          ): RecyclerView.ViewHolder(view) {
@@ -63,12 +61,19 @@ class ItemAdapter(private val context: Context,
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        val rating = "Rate: " + context.resources.getString(item.rateResourceId) + "/5"
-        holder.profilePhoto.setImageResource(item.profilePhotoResourceId)
-        holder.artistName.text = context.resources.getString(item.nameResourceId)
-        holder.artistJob.text = context.resources.getString(item.jobResourceId)
+        val rating = "Rate: ${item.rate}/5"
+        val name = item.firstName + " " + item.lastName
+        // Utilizați Glide pentru a încărca imaginea de profil de la URL
+//        Glide.with(context)
+//            .load(item.profilePhotoUrl)
+//            .centerCrop()
+//            .placeholder(R.drawable.ic_launcher_foreground) // Puneți o imagine placeholder
+//            .into(holder.profilePhoto)
+        holder.artistName.text = name
+        holder.artistJob.text = item.job
         holder.artistRate.text = rating
-        holder.artistDescription.text = context.resources.getString(item.descriptionResourceId)
+        holder.artistDescription.text = item.description
     }
+
 
 }
