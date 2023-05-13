@@ -29,7 +29,8 @@ class ArtistCardViewModel : ViewModel() {
                     val artistList = mutableListOf<ArtistItemList>()
                     for (document in documents) {
                         val artistItem = document.toObject(ArtistItemList::class.java)
-                        artistList.add(artistItem)
+                        val updatedArtistItem = artistItem.copy(id = document.id)
+                        artistList.add(updatedArtistItem)
                     }
                     artistList
                 }

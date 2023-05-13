@@ -37,14 +37,19 @@ class ArtistListFragment : Fragment() {
 
         viewModel.artistList.observe(viewLifecycleOwner, Observer { artistList ->
             val adapter = ItemAdapter(requireContext(), artistList)
-            val intent = Intent(requireActivity(), ProfileActivity::class.java)
-            recyclerView.adapter = adapter
 
             adapter.setOnItemClickListener(object : ItemAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int) {
+                override fun onItemClick(position: Int, id: String) {
+                    val intent = Intent(requireActivity(), ProfileActivity::class.java)
+                    val artistItem = artistList[position]
+                    intent.putExtra("id", id)
+                    intent.putExtra("artistItem", artistItem)
                     startActivity(intent)
                 }
             })
+
+            recyclerView.adapter = adapter
         })
+
     }
 }

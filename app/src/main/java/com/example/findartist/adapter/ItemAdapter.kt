@@ -1,6 +1,7 @@
 package com.example.findartist.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class ItemAdapter(private val context: Context,
 
     private lateinit var mListener: OnItemClickListener
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int, id:String)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -37,7 +38,7 @@ class ItemAdapter(private val context: Context,
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+                listener.onItemClick(adapterPosition, dataset[position].id)
             }
         }
 

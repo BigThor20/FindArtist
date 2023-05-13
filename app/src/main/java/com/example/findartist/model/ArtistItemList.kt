@@ -1,7 +1,10 @@
 package com.example.findartist.model
 
+import java.io.Serializable
+
 
 data class ArtistItemList(
+    val id: String = "",
     val profilePhotoUrl: String = "",
     val firstName: String = "",
     val lastName: String = "",
@@ -11,5 +14,4 @@ data class ArtistItemList(
     val industry: String = "",
     val job: String = "",
     val description: String = ""
-
-)
+): Serializable
