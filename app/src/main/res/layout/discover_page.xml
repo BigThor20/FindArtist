@@ -25,28 +25,12 @@
                 android:textSize="18sp" />
 
 
-            <TextView
+            <fragment
+                android:id="@+id/fragment_select_job"
+                android:name="com.example.findartist.views.SelectJobFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Industry" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:entries="@array/industries" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Job" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginBottom="10dp"
-                android:entries="@array/digital_art" />
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="match_parent"

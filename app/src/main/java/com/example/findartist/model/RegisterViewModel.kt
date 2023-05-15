@@ -68,41 +68,6 @@ class RegisterViewModel : ViewModel() {
         db.collection("users").document(userId).set(userMap).await()
     }
 
-    fun fetchFirstSpinnerData(): LiveData<List<String>> {
-        val firstSpinnerData = MutableLiveData<List<String>>()
-
-        viewModelScope.launch {
-            val data = getFirstSpinnerData()
-            firstSpinnerData.value = data
-        }
-
-        return firstSpinnerData
-    }
-
-    private suspend fun getFirstSpinnerData(): List<String> {
-        return withContext(Dispatchers.IO) {
-            val documents = db.collection("industries").get().await()
-            documents.map { it["value"].toString() }
-        }
-    }
-
-    fun fetchSecondSpinnerData(selectedOption: String): LiveData<List<String>> {
-        val secondSpinnerData = MutableLiveData<List<String>>()
-
-        viewModelScope.launch {
-            val data = getSecondSpinnerData(selectedOption)
-            secondSpinnerData.value = data
-        }
-
-        return secondSpinnerData
-    }
-
-    private suspend fun getSecondSpinnerData(selectedOption: String): List<String> {
-        return withContext(Dispatchers.IO) {
-            val document = db.collection("jobs").document(selectedOption).get().await()
-            document["options"] as List<String>
-        }
-    }
 
     private fun isEmailValid(email: String): ValidationResult {
         val emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"

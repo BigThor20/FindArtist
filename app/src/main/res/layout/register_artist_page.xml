@@ -87,26 +87,12 @@
         android:layout_marginBottom="10dp"
         android:inputType="text"/>
 
-    <TextView
+    <fragment
+        android:id="@+id/fragment_select_job"
+        android:name="com.example.findartist.views.SelectJobFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Industry"/>
-    <Spinner
-        android:id="@+id/industrySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Job"/>
-    <Spinner
-        android:id="@+id/jobSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:id="@+id/registerArtist"

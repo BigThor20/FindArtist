@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.findartist.R
 import com.example.findartist.model.Artist
@@ -14,52 +15,13 @@ import com.example.findartist.model.User
 import com.example.findartist.model.UserRole
 
 class RegisterArtistActivity : AppCompatActivity() {
+
     private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_artist_page)
 
-        val firstSpinner: Spinner = findViewById(R.id.industrySpinner)
-        val secondSpinner: Spinner = findViewById(R.id.jobSpinner)
-
-        // Variables to store selected values
-        var industry = ""
-        var job = ""
-
-        // Obțineți datele de la ViewModel pentru primul spinner
-        viewModel.fetchFirstSpinnerData().observe(this, Observer { firstSpinnerData ->
-            val firstSpinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, firstSpinnerData)
-            firstSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            firstSpinner.adapter = firstSpinnerAdapter
-        })
-
-        firstSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedOption = firstSpinner.selectedItem.toString()
-
-                // Store the selected value for industry
-                industry = selectedOption
-
-                // Obțineți datele de la ViewModel pentru al doilea spinner
-                viewModel.fetchSecondSpinnerData(selectedOption).observe(this@RegisterArtistActivity, Observer { secondSpinnerData ->
-                    val secondSpinnerAdapter = ArrayAdapter(this@RegisterArtistActivity, android.R.layout.simple_spinner_item, secondSpinnerData)
-                    secondSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    secondSpinner.adapter = secondSpinnerAdapter
-                })
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Nimic de făcut
-            }
-        }
-
-        secondSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                job = parent?.getItemAtPosition(position).toString()
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
         val registerButton = findViewById<Button>(R.id.registerArtist)
         registerButton.setOnClickListener {
@@ -69,6 +31,8 @@ class RegisterArtistActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
             val confirmPassword = findViewById<EditText>(R.id.editTextRepeatPassword).text.toString()
             val city = findViewById<EditText>(R.id.editTextCity).text.toString()
+            val industry = findViewById<Spinner>(R.id.industrySpinner).selectedItem.toString()
+            val job = findViewById<Spinner>(R.id.jobSpinner).selectedItem.toString()
 
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()
