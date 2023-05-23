@@ -41,9 +41,7 @@ class ItemAdapter(private val context: Context,
                 listener.onItemClick(adapterPosition, dataset[position].id)
             }
         }
-
     }
-
 
     /**
      * Create new views (invoked by the layout manager)

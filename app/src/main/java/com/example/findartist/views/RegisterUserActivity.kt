@@ -22,12 +22,12 @@ class RegisterUserActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.registerUser)
         registerButton.setOnClickListener {
-            val firstName = findViewById<EditText>(R.id.editTextFirstName1).text.toString()
-            val lastName = findViewById<EditText>(R.id.editTextLastName1).text.toString()
-            val mail = findViewById<EditText>(R.id.editTextEmail1).text.toString()
-            val password = findViewById<EditText>(R.id.editTextPassword1).text.toString()
-            val confirmPassword = findViewById<EditText>(R.id.editTextRepeatPassword1).text.toString()
-            val city = findViewById<EditText>(R.id.editTextCity1).text.toString()
+            val firstName = findViewById<EditText>(R.id.editTextFirstName).text.toString()
+            val lastName = findViewById<EditText>(R.id.editTextLastName).text.toString()
+            val mail = findViewById<EditText>(R.id.editTextEmail).text.toString()
+            val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
+            val confirmPassword = findViewById<EditText>(R.id.editTextRepeatPassword).text.toString()
+            val city = findViewById<EditText>(R.id.editTextCity).text.toString()
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()
                 && mail.isNotEmpty() && password.isNotEmpty()
