@@ -1,38 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:textSize="20sp">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Register as an artist"
-        android:textSize="30sp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <fragment
-        android:id="@+id/fragment_register_fields"
-        android:name="com.example.findartist.views.RegisterFieldsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Register as an artist"
+            android:textSize="30sp" />
 
+        <fragment
+            android:id="@+id/fragment_register_fields"
+            android:name="com.example.findartist.views.RegisterFieldsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
 
-    <fragment
-        android:id="@+id/fragment_select_job"
-        android:name="com.example.findartist.views.SelectJobFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" />
+        <fragment
+            android:id="@+id/fragment_select_job"
+            android:name="com.example.findartist.views.SelectJobFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
 
-    <Button
-        android:id="@+id/registerArtist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register" />
+        <Button
+            android:id="@+id/registerArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
