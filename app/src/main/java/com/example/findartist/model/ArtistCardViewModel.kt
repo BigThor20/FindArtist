@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.findartist.model.ArtistItemList
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -16,15 +17,12 @@ class ArtistCardViewModel : ViewModel() {
     private val _artistList = MutableLiveData<List<ArtistItemList>>()
     val artistList: LiveData<List<ArtistItemList>> = _artistList
 
-    fun fetchArtistsFromFirestore() {
+    fun fetchArtistsFromFirestore(industry : String?, job : String?, location : String?, name : String?) {
         viewModelScope.launch {
             try {
                 val fetchedArtists = withContext(Dispatchers.IO) {
-                    val db = FirebaseFirestore.getInstance()
-                    val documents = db.collection("users")
-                        .whereEqualTo("role", "ARTIST")
-                        .get()
-                        .await()
+
+                    val documents = getArtistDocuments(industry, job, location, name)
 
                     val artistList = mutableListOf<ArtistItemList>()
                     for (document in documents) {
@@ -40,5 +38,32 @@ class ArtistCardViewModel : ViewModel() {
                 // Handle the error
             }
         }
+    }
+
+    suspend fun getArtistDocuments(industry : String?, job : String?, city : String?, name : String?): QuerySnapshot {
+        val db = FirebaseFirestore.getInstance()
+//        if (industry == null
+//            && job == null && location == null && name == null){
+//            return db.collection("users")
+//                .whereEqualTo("role", "ARTIST")
+//                .get()
+//                .await()
+//        }
+        var query = db.collection("users").whereEqualTo("role", "ARTIST")
+        if (!industry.isNullOrEmpty()) {
+            query = query.whereEqualTo("industry", industry)
+        }
+        if (!job.isNullOrEmpty()) {
+            query = query.whereEqualTo("job", job)
+        }
+        if (!city.isNullOrEmpty()) {
+            query = query.whereEqualTo("city", city)
+        }
+        if (!name.isNullOrEmpty()) {
+            query = query.whereEqualTo("name", name)
+        }
+
+        return query.get().await()
+
     }
 }

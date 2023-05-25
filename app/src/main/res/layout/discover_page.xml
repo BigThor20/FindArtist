@@ -64,14 +64,14 @@
                 android:text="Name" />
 
             <EditText
-                android:id="@+id/nameFilter"
+                android:id="@+id/name_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:inputType="text" />
 
             <Button
-                android:id="@+id/registerArtist"
+                android:id="@+id/searchArtist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Search" />

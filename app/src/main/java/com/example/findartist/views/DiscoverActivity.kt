@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -37,6 +38,24 @@ class DiscoverActivity : AppCompatActivity() {
         getLocationButton.setOnClickListener {
             requestLocation(cityInput)
         }
+
+        val searchButton = this.findViewById<Button>(R.id.searchArtist)
+        searchButton.setOnClickListener{
+            Log.i("FILTRARE", "Se cauta artisti")
+            val industry = findViewById<Spinner>(R.id.industrySpinner).selectedItem.toString()
+            val job = findViewById<Spinner>(R.id.jobSpinner).selectedItem.toString()
+            val location = findViewById<EditText>(R.id.location_filter).text.toString()
+            val name = findViewById<EditText>(R.id.name_filter).text.toString()
+            reloadArtistListFragment(industry, job, location, name)
+
+        }
+    }
+
+    private fun reloadArtistListFragment(industry : String, job : String, location : String, name : String) {
+        val fragment = ArtistListFragment.newInstance(industry, job, location, name)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 
     private fun requestLocation(cityInput : EditText) {

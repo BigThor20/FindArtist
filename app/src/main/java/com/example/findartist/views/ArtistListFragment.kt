@@ -2,6 +2,7 @@ package com.example.findartist.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,20 @@ class ArtistListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: ArtistCardViewModel
 
+    companion object {
+        fun newInstance(industry: String, job : String, location : String, name : String)
+        : ArtistListFragment {
+            val fragment = ArtistListFragment()
+            val args = Bundle()
+            args.putString("industry", industry)
+            args.putString("job", job)
+            args.putString("location", location)
+            args.putString("name", name)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,8 +47,16 @@ class ArtistListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = ItemAdapter(requireContext(), emptyList()) // setează un adaptor gol
 
+        // incarca lista cu artisti
         viewModel = ViewModelProvider(this).get(ArtistCardViewModel::class.java)
-        viewModel.fetchArtistsFromFirestore()
+        // get parameters for filter artist list
+        val industry = arguments?.getString("industry")
+        val job = arguments?.getString("job")
+        val location = arguments?.getString("location")
+        val name = arguments?.getString("name")
+        Log.i("PARAMETERS", "PArametrii dati: $industry $job $location $name")
+
+        viewModel.fetchArtistsFromFirestore(industry, job, location, name)
 
         viewModel.artistList.observe(viewLifecycleOwner, Observer { artistList ->
             val adapter = ItemAdapter(requireContext(), artistList)
@@ -52,4 +75,5 @@ class ArtistListFragment : Fragment() {
         })
 
     }
+
 }
