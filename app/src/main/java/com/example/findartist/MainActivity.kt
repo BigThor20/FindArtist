@@ -22,13 +22,10 @@ import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
-    private val CHANNEL_ID = "channel_id_example_01"
-    private val notificationId = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
 
-        createNotificationChannel()
 
         //add firebase
         FirebaseApp.initializeApp(this)
@@ -38,48 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         val goToLoginButton = findViewById<Button>(R.id.goToLogin)
         goToLoginButton.setOnClickListener {
-            sendNotification()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Not title"
-            val descriptionText = " helllo"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun sendNotification() {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-
-
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Example title")
-            .setContentTitle("hello world")
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        with(NotificationManagerCompat.from(applicationContext)) {
-            notify(notificationId, builder.build())
-        }
-    }
 
     // Handle the Up button when it's pressed
 
