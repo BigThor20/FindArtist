@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.findartist.helpers.Validation
 import com.example.findartist.helpers.ValidationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -29,10 +30,11 @@ class RegisterViewModel : ViewModel() {
 
     fun register(user: User, password: String, confirmPassword: String) {
         viewModelScope.launch {
-            val emailError = isEmailValid(user.email)
-            val passwordError = doPasswordsMatch(password, confirmPassword)
-            val firstNameError = isNameValid(user.firstName)
-            val lastNameError = isNameValid(user.lastName)
+            val validation = Validation();
+            val emailError = validation.isEmailValid(user.email)
+            val passwordError = validation.doPasswordsMatch(password, confirmPassword)
+            val firstNameError = validation.isNameValid(user.firstName)
+            val lastNameError = validation.isNameValid(user.lastName)
 
             if (emailError is ValidationResult.Success &&
                 passwordError is ValidationResult.Success &&
@@ -63,34 +65,11 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    private suspend fun saveUserToFirestore(user: User, userId: String) = withContext(Dispatchers.IO) {
+    suspend fun saveUserToFirestore(user: User, userId: String) = withContext(Dispatchers.IO) {
         val userMap = user.toMap()
         db.collection("users").document(userId).set(userMap).await()
     }
 
 
-    private fun isEmailValid(email: String): ValidationResult {
-        val emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
-        val pattern = Pattern.compile(emailPattern)
-        val matcher = pattern.matcher(email)
-        return if (matcher.matches()) ValidationResult.Success else ValidationResult.Error("Invalid email format")
-    }
 
-    private fun doPasswordsMatch(password: String, confirmPassword: String): ValidationResult {
-        return if (password == confirmPassword) ValidationResult.Success else ValidationResult.Error("Passwords do not match")
-    }
-
-    private fun isPhoneNumberValid(phone: String): ValidationResult {
-        val phonePattern = "^07[0-9]{8}$"
-        val pattern = Pattern.compile(phonePattern)
-        val matcher = pattern.matcher(phone)
-        return if (matcher.matches()) ValidationResult.Success else ValidationResult.Error("Invalid phone number")
-    }
-
-    private fun isNameValid(name: String): ValidationResult {
-        val namePattern = "^[a-zA-Z]+(\\s+[a-zA-Z]+)?$"
-        val pattern = Pattern.compile(namePattern)
-        val matcher = pattern.matcher(name)
-        return if (matcher.matches()) ValidationResult.Success else ValidationResult.Error("Invalid name format")
-    }
 }
