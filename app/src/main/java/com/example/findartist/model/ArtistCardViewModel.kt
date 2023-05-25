@@ -42,13 +42,7 @@ class ArtistCardViewModel : ViewModel() {
 
     suspend fun getArtistDocuments(industry : String?, job : String?, city : String?, name : String?): QuerySnapshot {
         val db = FirebaseFirestore.getInstance()
-//        if (industry == null
-//            && job == null && location == null && name == null){
-//            return db.collection("users")
-//                .whereEqualTo("role", "ARTIST")
-//                .get()
-//                .await()
-//        }
+
         var query = db.collection("users").whereEqualTo("role", "ARTIST")
         if (!industry.isNullOrEmpty()) {
             query = query.whereEqualTo("industry", industry)
@@ -60,7 +54,7 @@ class ArtistCardViewModel : ViewModel() {
             query = query.whereEqualTo("city", city)
         }
         if (!name.isNullOrEmpty()) {
-            query = query.whereEqualTo("name", name)
+            query = query.whereEqualTo("firstName", name)
         }
 
         return query.get().await()
