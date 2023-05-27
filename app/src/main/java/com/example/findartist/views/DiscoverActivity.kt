@@ -1,6 +1,7 @@
 package com.example.findartist.views
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -32,16 +33,16 @@ class DiscoverActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_discover -> {
-                    // Handle Home item selection
-                    Log.i("home", "am apasat buton")
                     true
                 }
                 R.id.menu_chats -> {
-                    // Handle Search item selection
+                    val intent = Intent(this, ChatsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.menu_profile -> {
-                    // Handle Profile item selection
+                    val intent = Intent(this, MyProfileActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false

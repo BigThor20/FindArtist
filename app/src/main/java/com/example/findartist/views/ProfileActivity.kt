@@ -1,5 +1,6 @@
 package com.example.findartist.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -13,8 +14,10 @@ import com.example.findartist.adapter.ImageAdapter
 import com.example.findartist.adapter.ItemAdapter
 import com.example.findartist.data.Datasource
 import com.example.findartist.model.ArtistItemList
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileActivity: AppCompatActivity() {
+    private lateinit var bottomNavigationView: BottomNavigationView
     private val images = listOf(
         R.drawable.image1,
         R.drawable.image2,
@@ -25,6 +28,30 @@ class ProfileActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile)
+
+        //nav
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_discover -> {
+                    val intent = Intent(this, DiscoverActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menu_chats -> {
+                    val intent = Intent(this, ChatsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menu_profile -> {
+                    val intent = Intent(this, MyProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+        //end nav
 
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)

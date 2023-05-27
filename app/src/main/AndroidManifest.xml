@@ -53,6 +53,16 @@
             android:parentActivityName=".views.DiscoverActivity"
             android:label="Profile">
         </activity>
+        <activity
+            android:name=".views.MyProfileActivity"
+            android:parentActivityName=".views.DiscoverActivity"
+            android:label="MyProfile">
+        </activity>
+        <activity
+            android:name=".views.ChatsActivity"
+            android:parentActivityName=".views.DiscoverActivity"
+            android:label="Profile">
+        </activity>
 
 
     </application>
