@@ -3,6 +3,8 @@ package com.example.findartist.views
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,8 @@ import com.example.findartist.model.ArtistCardViewModel
 import com.example.findartist.model.MyProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MyProfileActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -46,15 +50,12 @@ class MyProfileActivity : AppCompatActivity() {
         //get id
         val currentUser = FirebaseAuth.getInstance().currentUser
         var userId = ""
-        // Check if the user is not null
-        if (currentUser != null) {
-            // Retrieve the user ID
-             userId = currentUser.uid
 
-            // Use the user ID as needed
-            println("User ID: $userId")
+        // GET values from db
+
+        if (currentUser != null) {
+             userId = currentUser.uid
         } else {
-            // Handle the case when the user is null or not authenticated
             println("User not authenticated")
         }
         //end nav
@@ -94,6 +95,45 @@ class MyProfileActivity : AppCompatActivity() {
                 Log.e("FetchDB", "description doesn't exist for this user")
             }
         }
+
+        // UPDATE values from db
+
+        val updateFirstNameButton = findViewById<Button>(R.id.updateFirstNameButton)
+        updateFirstNameButton.setOnClickListener{
+            val newFirstName = findViewById<EditText>(R.id.editProfileFirstName).text
+            GlobalScope.launch {
+                myProfileViewModel.updateFieldValueFromCollection(
+                    "users", "firstName", userId, newFirstName.toString())
+            }
+        }
+
+        val updateLastNameButton = findViewById<Button>(R.id.updateLastNameButton)
+        updateLastNameButton.setOnClickListener{
+            val newLastName = findViewById<EditText>(R.id.editProfileLastName).text
+            GlobalScope.launch {
+                myProfileViewModel.updateFieldValueFromCollection(
+                    "users", "lastName", userId, newLastName.toString())
+            }
+        }
+
+        val updatePhoneButton = findViewById<Button>(R.id.updatePhoneButton)
+        updatePhoneButton.setOnClickListener{
+            val newPhone = findViewById<EditText>(R.id.editProfilePhone).text
+            GlobalScope.launch {
+                myProfileViewModel.updateFieldValueFromCollection(
+                    "users", "phone", userId, newPhone.toString())
+            }
+        }
+
+        val updateDescriptionButton = findViewById<Button>(R.id.updateDescriptionButton)
+        updateDescriptionButton.setOnClickListener{
+            val newDescription = findViewById<EditText>(R.id.editProfileDescription).text
+            GlobalScope.launch {
+                myProfileViewModel.updateFieldValueFromCollection(
+                    "users", "description", userId, newDescription.toString())
+            }
+        }
+
 
 
     }

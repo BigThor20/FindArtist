@@ -43,5 +43,26 @@ class MyProfileViewModel : ViewModel() {
         }
     }
 
+    suspend fun updateFieldValueFromCollection(
+        collectionName: String,
+        fieldName: String,
+        userId: String,
+        value: String
+    ) {
+        withContext(Dispatchers.IO) {
+            try {
+                val firestore = FirebaseFirestore.getInstance()
+                val userDocRef = firestore.collection(collectionName).document(userId)
+                val updateData = hashMapOf<String, Any>(fieldName to value)
+                userDocRef.update(updateData).await()
+                Log.i("FirestoreDB", "field $fieldName updated")
+            } catch (exception: Exception) {
+                Log.d("FireStore", "Error updating field value: ", exception)
+            }
+        }
+    }
 
 }
+
+
+
