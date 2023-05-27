@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,12 +16,6 @@
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,15 +75,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Search" />
-        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>
+
     </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-
-</androidx.core.widget.NestedScrollView>
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomBottomNavigationStyle"
+        app:itemTextAppearanceActive="@style/CustomBottomNavigationStyle"
+        app:itemTextAppearanceInactive="@style/CustomBottomNavigationStyle"
+        app:menu="@menu/bottom_navigation_menu" />
+</LinearLayout>

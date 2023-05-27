@@ -16,14 +16,38 @@ import com.example.findartist.R
 import com.example.findartist.location.LocationUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DiscoverActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var bottomNavigationView: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.discover_page)
+
+        //nav
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_discover -> {
+                    // Handle Home item selection
+                    Log.i("home", "am apasat buton")
+                    true
+                }
+                R.id.menu_chats -> {
+                    // Handle Search item selection
+                    true
+                }
+                R.id.menu_profile -> {
+                    // Handle Profile item selection
+                    true
+                }
+                else -> false
+            }
+        }
+        //end nav
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

@@ -1,0 +1,20 @@
+<resources>
+    <!-- App theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Other style attributes -->
+
+        <!-- Customize BottomNavigationView -->
+        <item name="bottomNavigationStyle">@style/CustomBottomNavigationStyle</item>
+    </style>
+
+    <!-- Custom style for BottomNavigationView -->
+    <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/blue_500</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+
+
+</resources>
