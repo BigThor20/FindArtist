@@ -1,32 +1,42 @@
 package com.example.findartist.views
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.findartist.R
 import com.example.findartist.model.ArtistCardViewModel
 import com.example.findartist.model.MyProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MyProfileActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var myProfileViewModel: MyProfileViewModel
+    lateinit var imageView: ImageView
+    lateinit var button: Button
+    private val pickImage = 100
+    private var imageUri: Uri? = null
+    var userId = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_profile)
 
-        //nav
+        // NAVBAR
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.menu_profile
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
@@ -47,14 +57,14 @@ class MyProfileActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        //get id
+        // GET CURRENT USER ID
         val currentUser = FirebaseAuth.getInstance().currentUser
-        var userId = ""
+
 
         // GET values from db
 
         if (currentUser != null) {
-             userId = currentUser.uid
+            userId = currentUser.uid
         } else {
             println("User not authenticated")
         }
@@ -65,76 +75,139 @@ class MyProfileActivity : AppCompatActivity() {
         val lastNameTextView = findViewById<TextView>(R.id.MyLastName)
         val phoneTextView = findViewById<TextView>(R.id.MyPhone)
         val descriptionTextView = findViewById<TextView>(R.id.MyDescription)
+        val profilePhotoImageView = findViewById<ImageView>(R.id.actual_profile_photo)
 
-         myProfileViewModel.getFieldValueFromCollection("users", "firstName", userId) { fieldValue ->
+        myProfileViewModel.getFieldValueFromCollection("users", "firstName", userId) { fieldValue ->
             if (fieldValue != null) {
-                firstNameTextView.text =fieldValue
+                firstNameTextView.text = fieldValue
             } else {
                 Log.e("FetchDB", "firstName doesn't exist for this user")
             }
         }
         myProfileViewModel.getFieldValueFromCollection("users", "lastName", userId) { fieldValue ->
             if (fieldValue != null) {
-                lastNameTextView.text =fieldValue
+                lastNameTextView.text = fieldValue
             } else {
                 Log.e("FetchDB", "lastName doesn't exist for this user")
             }
         }
         myProfileViewModel.getFieldValueFromCollection("users", "phone", userId) { fieldValue ->
             if (fieldValue != null) {
-                phoneTextView.text =fieldValue
+                phoneTextView.text = fieldValue
             } else {
                 Log.e("FetchDB", "phone doesn't exist for this user")
             }
         }
 
-        myProfileViewModel.getFieldValueFromCollection("users", "description", userId) { fieldValue ->
+        myProfileViewModel.getFieldValueFromCollection(
+            "users",
+            "description",
+            userId
+        ) { fieldValue ->
             if (fieldValue != null) {
-                descriptionTextView.text =fieldValue
+                descriptionTextView.text = fieldValue
             } else {
                 Log.e("FetchDB", "description doesn't exist for this user")
+            }
+        }
+
+        myProfileViewModel.getFieldValueFromCollection(
+            "users",
+            "profilePhotoUrl",
+            userId
+        ) { fieldValue ->
+            if (fieldValue != null) {
+                Glide.with(this)
+                    .load(fieldValue)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_launcher_foreground) // Puneți o imagine placeholder
+                    .into(profilePhotoImageView)
+            } else {
+                Log.e("FetchDB", "profile photo URL doesn't exist for this user")
             }
         }
 
         // UPDATE values from db
 
         val updateFirstNameButton = findViewById<Button>(R.id.updateFirstNameButton)
-        updateFirstNameButton.setOnClickListener{
+        updateFirstNameButton.setOnClickListener {
             val newFirstName = findViewById<EditText>(R.id.editProfileFirstName).text
             GlobalScope.launch {
                 myProfileViewModel.updateFieldValueFromCollection(
-                    "users", "firstName", userId, newFirstName.toString())
+                    "users", "firstName", userId, newFirstName.toString()
+                )
             }
         }
 
         val updateLastNameButton = findViewById<Button>(R.id.updateLastNameButton)
-        updateLastNameButton.setOnClickListener{
+        updateLastNameButton.setOnClickListener {
             val newLastName = findViewById<EditText>(R.id.editProfileLastName).text
             GlobalScope.launch {
                 myProfileViewModel.updateFieldValueFromCollection(
-                    "users", "lastName", userId, newLastName.toString())
+                    "users", "lastName", userId, newLastName.toString()
+                )
             }
         }
 
         val updatePhoneButton = findViewById<Button>(R.id.updatePhoneButton)
-        updatePhoneButton.setOnClickListener{
+        updatePhoneButton.setOnClickListener {
             val newPhone = findViewById<EditText>(R.id.editProfilePhone).text
             GlobalScope.launch {
                 myProfileViewModel.updateFieldValueFromCollection(
-                    "users", "phone", userId, newPhone.toString())
+                    "users", "phone", userId, newPhone.toString()
+                )
             }
         }
 
         val updateDescriptionButton = findViewById<Button>(R.id.updateDescriptionButton)
-        updateDescriptionButton.setOnClickListener{
+        updateDescriptionButton.setOnClickListener {
             val newDescription = findViewById<EditText>(R.id.editProfileDescription).text
             GlobalScope.launch {
                 myProfileViewModel.updateFieldValueFromCollection(
-                    "users", "description", userId, newDescription.toString())
+                    "users", "description", userId, newDescription.toString()
+                )
             }
         }
 
-
-
+        FirebaseStorage.getInstance()
+        // UPLOAD PHOTO
+        imageView = findViewById(R.id.new_profile_photo)
+        button = findViewById(R.id.buttonLoadPicture)
+        button.setOnClickListener {
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+            imageView.setImageURI(imageUri)
+
+            // Upload the image to Firebase Storage
+            imageUri?.let { uri ->
+                val storageRef = FirebaseStorage.getInstance().reference
+                val imageRef = storageRef.child("profile_photos/${System.currentTimeMillis()}.jpg")
+
+                val uploadTask = imageRef.putFile(uri)
+                uploadTask.addOnSuccessListener { taskSnapshot ->
+                    // Image uploaded successfully
+                    imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                        val imageUrl = downloadUri.toString()
+                        // Use the image URL as needed (e.g., store it in Firestore)
+                        Log.i("IMAAAAAAGEEEE", imageUrl)
+                        GlobalScope.launch {
+                            myProfileViewModel.updateFieldValueFromCollection(
+                                "users", "profilePhotoUrl", userId, imageUrl)
+                        }
+                    }
+                }.addOnFailureListener { exception ->
+                    // Error uploading image
+                    // Handle the error as needed
+                }
+            }
+        }
+    }
+
+
 }

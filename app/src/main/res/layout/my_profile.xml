@@ -194,6 +194,51 @@
                     android:text="Update" />
             </LinearLayout>
 
+            <!--            ACTUAL PHOTO section-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="2dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:padding="6dp"
+                    android:text="Your profile photo:" />
+                <ImageView
+                    android:id="@+id/actual_profile_photo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:padding="6dp"
+                android:text="Update profile photo by store a new image with this load button:" />
+
+<!--            New PHOTO section-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/new_profile_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/buttonLoadPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:text="Load Picture" />
+        </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
