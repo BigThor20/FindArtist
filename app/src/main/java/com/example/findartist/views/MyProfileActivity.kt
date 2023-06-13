@@ -57,10 +57,6 @@ class MyProfileActivity : AppCompatActivity() {
         }
         // GET CURRENT USER ID
         val currentUser = FirebaseAuth.getInstance().currentUser
-
-
-        // GET values from db
-
         if (currentUser != null) {
             userId = currentUser.uid
         } else {
@@ -73,7 +69,7 @@ class MyProfileActivity : AppCompatActivity() {
         val lastNameTextView = findViewById<TextView>(R.id.MyLastName)
         val phoneTextView = findViewById<TextView>(R.id.MyPhone)
         val descriptionTextView = findViewById<TextView>(R.id.MyDescription)
-         imageView = findViewById<ImageView>(R.id.actual_profile_photo)
+        imageView = findViewById<ImageView>(R.id.actual_profile_photo)
 
         myProfileViewModel.getFieldValueFromCollection("users", "firstName", userId) { fieldValue ->
             if (fieldValue != null) {

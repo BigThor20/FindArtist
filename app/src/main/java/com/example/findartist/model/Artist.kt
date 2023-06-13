@@ -10,7 +10,8 @@ class Artist(
     private val job: String,
     private val rate: Float,
     private val description: String,
-    private val profilePhotoUrl: String
+    private val profilePhotoUrl: String,
+    private val photos: ArrayList<String>
 ) : User(firstName, lastName, role, email, city) {
     override fun toMap(): HashMap<String, Any> {
         val artistMap = super.toMap()
@@ -19,6 +20,7 @@ class Artist(
         artistMap["rate"] = rate
         artistMap["description"] = description
         artistMap["profilePhotoUrl"] = profilePhotoUrl
+        artistMap["photos"] = photos
         return artistMap
     }
 }
