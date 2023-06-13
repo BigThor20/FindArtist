@@ -10,11 +10,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.findartist.R
-import com.example.findartist.model.ArtistCardViewModel
 import com.example.findartist.model.MyProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -75,7 +73,7 @@ class MyProfileActivity : AppCompatActivity() {
         val lastNameTextView = findViewById<TextView>(R.id.MyLastName)
         val phoneTextView = findViewById<TextView>(R.id.MyPhone)
         val descriptionTextView = findViewById<TextView>(R.id.MyDescription)
-        val profilePhotoImageView = findViewById<ImageView>(R.id.actual_profile_photo)
+         imageView = findViewById<ImageView>(R.id.actual_profile_photo)
 
         myProfileViewModel.getFieldValueFromCollection("users", "firstName", userId) { fieldValue ->
             if (fieldValue != null) {
@@ -121,7 +119,7 @@ class MyProfileActivity : AppCompatActivity() {
                     .load(fieldValue)
                     .centerCrop()
                     .placeholder(R.drawable.ic_launcher_foreground) // Puneți o imagine placeholder
-                    .into(profilePhotoImageView)
+                    .into(imageView)
             } else {
                 Log.e("FetchDB", "profile photo URL doesn't exist for this user")
             }
@@ -171,7 +169,6 @@ class MyProfileActivity : AppCompatActivity() {
 
         FirebaseStorage.getInstance()
         // UPLOAD PHOTO
-        imageView = findViewById(R.id.new_profile_photo)
         button = findViewById(R.id.buttonLoadPicture)
         button.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
