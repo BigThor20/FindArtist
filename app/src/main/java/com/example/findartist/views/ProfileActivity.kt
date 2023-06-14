@@ -117,6 +117,15 @@ class ProfileActivity: AppCompatActivity() {
             }
         }
 
+        // send message
+        var sendMessageButton = findViewById<Button>(R.id.goToChat)
+        sendMessageButton.setOnClickListener{
+            val intent = Intent(this@ProfileActivity, ChatActivity::class.java)
+            // Puteți adăuga date suplimentare la intent, cum ar fi ID-ul sau alte informații despre chatItem
+            intent.putExtra("userId", userId)
+            intent.putExtra("artistId", artistId)
+            startActivity(intent)
+        }
 
 
 

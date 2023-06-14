@@ -136,6 +136,14 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
+                <Button
+                    android:id="@+id/goToChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Send a message" />
+
             </LinearLayout>
 
             <!-- Description section -->

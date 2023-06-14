@@ -63,6 +63,11 @@
             android:parentActivityName=".views.DiscoverActivity"
             android:label="Profile">
         </activity>
+        <activity
+            android:name=".views.ChatActivity"
+            android:parentActivityName=".views.ChatsActivity"
+            android:label="Messages">
+        </activity>
 
 
     </application>
