@@ -53,7 +53,8 @@ class RegisterArtistActivity : AppCompatActivity() {
             if (firstName.isNotEmpty() && lastName.isNotEmpty()
                 && mail.isNotEmpty() && password.isNotEmpty()
                 && city.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                val user = Artist(firstName, lastName, UserRole.ARTIST, mail, city, industry, job, 3.7f, "", "",ArrayList<String>());
+                val user = Artist(firstName, lastName, UserRole.ARTIST, mail, city, industry, job,
+                    0f, "", "",ArrayList<String>(), ArrayList<Map<String, String>>());
                 viewModel.register(user, password, confirmPassword)
 
             } else {

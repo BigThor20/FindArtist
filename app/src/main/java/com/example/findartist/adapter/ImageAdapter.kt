@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.findartist.R
 
-class ImageAdapter(private val images: List<Int>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(private val images: ArrayList<String>?) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.portfolio_image)
@@ -21,11 +22,17 @@ class ImageAdapter(private val images: List<Int>) : RecyclerView.Adapter<ImageAd
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val imageResId = images[position]
-        holder.imageView.setImageResource(imageResId)
+//        val imageResId = images[position]
+//        holder.imageView.setImageResource(imageResId)
+        val imageUrl = images?.get(position)
+        Glide.with(holder.itemView)
+            .load(imageUrl)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_foreground) // Adaugă o imagine placeholder
+            .into(holder.imageView)
     }
 
     override fun getItemCount(): Int {
-        return images.size
+        return images?.size ?: 0
     }
 }
