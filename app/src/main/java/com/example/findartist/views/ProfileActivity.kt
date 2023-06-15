@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.findartist.R
 import com.example.findartist.adapter.ImageAdapter
-import com.example.findartist.adapter.ItemAdapter
-import com.example.findartist.data.Datasource
 import com.example.findartist.model.ArtistItemList
 import com.example.findartist.model.ProfileViewModel
-import com.example.findartist.model.RegisterViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,7 +36,7 @@ class ProfileActivity: AppCompatActivity() {
                     true
                 }
                 R.id.menu_chats -> {
-                    val intent = Intent(this, ChatsActivity::class.java)
+                    val intent = Intent(this, ChatsListActivity::class.java)
                     startActivity(intent)
                     true
                 }

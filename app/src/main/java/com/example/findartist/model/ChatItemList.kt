@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class ChatItemList(
     val name: String = "",
-    val profilePhotoLink: String = ""
+    val profilePhotoUrl: String = ""
 ): Serializable

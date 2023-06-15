@@ -45,7 +45,7 @@ class MyProfileActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menu_chats -> {
-                    val intent = Intent(this, ChatsActivity::class.java)
+                    val intent = Intent(this, ChatsListActivity::class.java)
                     startActivity(intent)
                     true
                 }

@@ -59,13 +59,13 @@
             android:label="MyProfile">
         </activity>
         <activity
-            android:name=".views.ChatsActivity"
+            android:name=".views.ChatsListActivity"
             android:parentActivityName=".views.DiscoverActivity"
             android:label="Profile">
         </activity>
         <activity
             android:name=".views.ChatActivity"
-            android:parentActivityName=".views.ChatsActivity"
+            android:parentActivityName=".views.ChatsListActivity"
             android:label="Messages">
         </activity>
 

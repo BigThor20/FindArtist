@@ -1,5 +1,4 @@
 package com.example.findartist.adapter
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +35,7 @@ class ChatItemsAdapter(private val chatItems: List<ChatItemList>) : RecyclerView
         val chatItem = chatItems[position]
 
         Glide.with(holder.itemView)
-            .load(chatItem.profilePhotoLink)
+            .load(chatItem.profilePhotoUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground) // Adaugă o imagine placeholder
             .into(holder.profilePhotoImageView)

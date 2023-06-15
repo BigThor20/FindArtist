@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -36,7 +35,7 @@ class DiscoverActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menu_chats -> {
-                    val intent = Intent(this, ChatsActivity::class.java)
+                    val intent = Intent(this, ChatsListActivity::class.java)
                     startActivity(intent)
                     true
                 }
