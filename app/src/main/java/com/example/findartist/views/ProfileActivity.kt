@@ -15,6 +15,9 @@ import com.example.findartist.model.ArtistItemList
 import com.example.findartist.model.ProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileActivity: AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -71,7 +74,12 @@ class ProfileActivity: AppCompatActivity() {
         val artistName = artistItem?.firstName + " " + artistItem?.lastName
         profileNameTextView.text = artistName
         profileJobTextView.text = artistItem?.job
-        profileRateTextView.text = artistItem?.rate.toString()
+        var rate = 0f;
+        CoroutineScope(Dispatchers.Main).launch {
+            rate = viewModel.getAvgRating(artistId.toString())
+            profileRateTextView.text = rate.toString()
+        }
+
         profilePhoneTextView.text = artistItem?.phone.toString()
         profileMailTextView.text = artistItem?.email.toString()
         profileDescriptionTextView.text = artistItem?.description

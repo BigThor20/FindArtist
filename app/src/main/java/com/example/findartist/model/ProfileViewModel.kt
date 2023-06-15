@@ -2,11 +2,13 @@ package com.example.findartist.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
+import java.util.concurrent.CompletableFuture
 
 class ProfileViewModel : ViewModel() {
     fun addRating(userId: String, artistId: String?, rating: Int) {
@@ -52,35 +54,31 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    private fun checkIfRatingExistFromUser(userId: String, artistId: String?) : Boolean {
-        val db = FirebaseFirestore.getInstance()
-        val documentRef = db.collection("users").document(artistId.toString())
-        var returnVal = false
-        documentRef.get().addOnSuccessListener { documentSnapshot ->
-            if (documentSnapshot.exists()) {
-                val ratingsList = documentSnapshot.get("ratings") as? ArrayList<Map<String, String>>
-                if (ratingsList != null) {
-                    // Process the ratings list
-                    for (rating in ratingsList) {
-                        val id = rating["userId"] as? String
-                        if (userId == id) {
-                            returnVal = true
-                        }
-                    }
-                    Log.i("PLM1", returnVal.toString())
-                }
-            } else {
-                Log.d("Firestore", "Document does not exist")
-            }
-        }.addOnFailureListener { exception ->
-            Log.e("Firestore", "Error getting document: ", exception)
-        }
 
-        Log.i("PLM2", returnVal.toString())
-        return returnVal
-
-    }
 
     fun removeRating(userId: String, artistId : String?) {}
-    fun getAvgRating(artistId: String) {}
+    suspend fun getAvgRating(myId: String): Float = withContext(Dispatchers.IO) {
+        val firestore = FirebaseFirestore.getInstance()
+        val documentRef = firestore.collection("users").document(myId)
+
+        val snapshot = documentRef.get().await()
+
+        if (snapshot.exists()) {
+            val ratings = snapshot.get("ratings") as List<HashMap<String, Any>>
+
+            var sum = 0f
+            for (rating in ratings) {
+                val rate = rating["rate"] as String
+                sum += rate.toFloatOrNull() ?: 0f
+            }
+
+            if (sum != 0f) {
+                return@withContext sum / ratings.size
+            }
+        }
+
+        return@withContext 0f
+    }
+
+
 }
