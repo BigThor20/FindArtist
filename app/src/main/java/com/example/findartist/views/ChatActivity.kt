@@ -54,10 +54,17 @@ class ChatActivity : AppCompatActivity() {
             MessageItem("How are you?", "YAR6C3TBO0bUR2iAbb2HvqqGDqm1", "2022-01-01"),
             // Adăugați mai multe elemente după nevoie
         )
+        val documentId1 = "$userId-$artistId"
+        val documentId2 = "$artistId-$userId"
 
         val messageAdapter = MessageAdapter(messageList, userId)
         chatRecyclerView.adapter = messageAdapter
         chatRecyclerView.layoutManager = LinearLayoutManager(this)
+        viewModel.messageItems.observe(this) { chatItems ->
+            messageAdapter.submitList(chatItems)
+        }
+
+        viewModel.getMessagesFromFirestore(documentId1, documentId2)
 
         sendButton.setOnClickListener {
             val message = messageEditText.text.toString()

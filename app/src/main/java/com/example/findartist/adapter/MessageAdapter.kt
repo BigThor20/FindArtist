@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.findartist.R
 import com.example.findartist.model.MessageItem
 
-class MessageAdapter(private val messageList: List<MessageItem>, private val userId: String) :
+class MessageAdapter(private var messageList: List<MessageItem>, private val userId: String) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -18,11 +18,9 @@ class MessageAdapter(private val messageList: List<MessageItem>, private val use
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view: View
-        if (viewType == VIEW_TYPE_USER) {
-            view = layoutInflater.inflate(R.layout.item_chat_me, parent, false)
-        } else {
-            view = layoutInflater.inflate(R.layout.item_chat_other, parent, false)
+        val view: View = when (viewType) {
+            VIEW_TYPE_USER -> layoutInflater.inflate(R.layout.item_chat_me, parent, false)
+            else -> layoutInflater.inflate(R.layout.item_chat_other, parent, false)
         }
         return MessageViewHolder(view)
     }
@@ -38,11 +36,12 @@ class MessageAdapter(private val messageList: List<MessageItem>, private val use
 
     override fun getItemViewType(position: Int): Int {
         val message = messageList[position]
-        return if (message.sender == userId) {
-            VIEW_TYPE_USER
-        } else {
-            VIEW_TYPE_OTHER
-        }
+        return if (message.sender == userId) VIEW_TYPE_USER else VIEW_TYPE_OTHER
+    }
+
+    fun submitList(newMessageList: List<MessageItem>) {
+        messageList = newMessageList
+        notifyDataSetChanged()
     }
 
     companion object {
@@ -50,3 +49,4 @@ class MessageAdapter(private val messageList: List<MessageItem>, private val use
         private const val VIEW_TYPE_OTHER = 2
     }
 }
+

@@ -20,17 +20,27 @@ class ChatsListViewModel : ViewModel() {
                 val firestore = FirebaseFirestore.getInstance()
                 val collectionRef = firestore.collection("chats")
 
-                val query = collectionRef.whereEqualTo("sender", sender)
-                val snapshot = query.get().await()
+
+                val querySender = collectionRef.whereEqualTo("sender", sender)
+                val queryReceiver = collectionRef.whereEqualTo("receiver", sender)
+                val snapshotSender = querySender.get().await()
+                val snapshotReceiver = queryReceiver.get().await()
 
                 val receivers = mutableListOf<String>()
 
-                for (document in snapshot.documents) {
+                for (document in snapshotSender.documents) {
                     val receiver = document.getString("receiver")
                     if (receiver != null) {
                         receivers.add(receiver)
                     }
                 }
+                for (document in snapshotReceiver.documents) {
+                    val receiver = document.getString("sender")
+                    if (receiver != null) {
+                        receivers.add(receiver)
+                    }
+                }
+
                 val users = firestore.collection("users")
 
                 val chatItems = mutableListOf<ChatItemList>()

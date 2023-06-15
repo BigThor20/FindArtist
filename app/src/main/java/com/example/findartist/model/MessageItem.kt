@@ -5,5 +5,5 @@ import java.io.Serializable
 data class MessageItem (
     val content: String = "",
     val sender: String = "",
-    val data: String = ""
+    val date: String = ""
 ): Serializable
