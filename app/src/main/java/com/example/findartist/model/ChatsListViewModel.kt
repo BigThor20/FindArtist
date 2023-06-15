@@ -43,8 +43,9 @@ class ChatsListViewModel : ViewModel() {
                         val lastName = documentSnapshot.getString("lastName") ?: ""
                         val name = "$firstName $lastName"
                         val profilePhotoUrl = documentSnapshot.getString("profilePhotoUrl") ?: ""
+                        val artistId = documentSnapshot.id
 
-                        val chatItem = ChatItemList(name, profilePhotoUrl)
+                        val chatItem = ChatItemList(name, profilePhotoUrl, artistId)
                         chatItems.add(chatItem)
                     }
                 }

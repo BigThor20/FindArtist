@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findartist.R
+import com.example.findartist.adapter.MessageAdapter
 import com.example.findartist.model.ChatViewModel
+import com.example.findartist.model.MessageItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +46,17 @@ class ChatActivity : AppCompatActivity() {
                 Log.e("FetchDB", "firstName doesn't exist for this user")
             }
         }
+        //load messages
+        val messageList = listOf(
+            MessageItem("Hello", "YAR6C3TBO0bUR2iAbb2HvqqGDqm1", "2022-01-01"),
 
+            MessageItem("Hi", "Alice", "2022-01-02"),
+            MessageItem("How are you?", "YAR6C3TBO0bUR2iAbb2HvqqGDqm1", "2022-01-01"),
+            // Adăugați mai multe elemente după nevoie
+        )
+
+        val messageAdapter = MessageAdapter(messageList, userId)
+        chatRecyclerView.adapter = messageAdapter
         chatRecyclerView.layoutManager = LinearLayoutManager(this)
 
         sendButton.setOnClickListener {

@@ -30,12 +30,6 @@ class ChatsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chats)
 
-        ///hardcodare pt design
-
-//        chatItems.add(ChatItemList("Georgiana Popescu", "https://firebasestorage.googleapis.com/v0/b/findartists-7dd64.appspot.com/o/profile_photos%2Fprofile5.jpeg?alt=media&token=c0798fde-cf03-4649-b984-4157bec44592" ))
-//        chatItems.add(ChatItemList("Georgiana Popescu", "https://firebasestorage.googleapis.com/v0/b/findartists-7dd64.appspot.com/o/profile_photos%2Fprofile5.jpeg?alt=media&token=c0798fde-cf03-4649-b984-4157bec44592" ))
-//        chatItems.add(ChatItemList("Georgiana Popescu", "https://firebasestorage.googleapis.com/v0/b/findartists-7dd64.appspot.com/o/profile_photos%2Fprofile5.jpeg?alt=media&token=c0798fde-cf03-4649-b984-4157bec44592" ))
-
         // GET CURRENT USER ID
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
@@ -56,6 +50,8 @@ class ChatsListActivity : AppCompatActivity() {
                 override fun onChatItemClick(chatItem: ChatItemList) {
                     val intent = Intent(this@ChatsListActivity, ChatActivity::class.java)
                     // Puteți adăuga date suplimentare la intent, cum ar fi ID-ul sau alte informații despre chatItem
+                    intent.putExtra("userId", userId)
+                    intent.putExtra("artistId", chatItem.artistId)
                     startActivity(intent)
                 }
             })
