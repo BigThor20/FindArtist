@@ -1,5 +1,6 @@
 package com.example.findartist.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,8 +28,10 @@ class ArtistCardViewModel : ViewModel() {
                     val artistList = mutableListOf<ArtistItemList>()
                     for (document in documents) {
                         val artistItem = document.toObject(ArtistItemList::class.java)
-                        val updatedArtistItem = artistItem.copy(id = document.id)
+                        val rating = getAvgRating(document.id)
+                        val updatedArtistItem = artistItem.copy(id = document.id, rate = rating)
                         artistList.add(updatedArtistItem)
+                        Log.i("artist", updatedArtistItem.toString())
                     }
                     artistList
                 }
@@ -59,5 +62,28 @@ class ArtistCardViewModel : ViewModel() {
 
         return query.get().await()
 
+    }
+
+    suspend fun getAvgRating(myId: String): Float = withContext(Dispatchers.IO) {
+        val firestore = FirebaseFirestore.getInstance()
+        val documentRef = firestore.collection("users").document(myId)
+
+        val snapshot = documentRef.get().await()
+
+        if (snapshot.exists()) {
+            val ratings = snapshot.get("ratings") as List<HashMap<String, Any>>
+
+            var sum = 0f
+            for (rating in ratings) {
+                val rate = rating["rate"] as String
+                sum += rate.toFloatOrNull() ?: 0f
+            }
+
+            if (sum != 0f) {
+                return@withContext sum / ratings.size
+            }
+        }
+
+        return@withContext 0f
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.findartist.R
 import com.example.findartist.model.ArtistItemList
+import com.example.findartist.model.ProfileViewModel
 
 class ItemAdapter(private val context: Context,
                   private val dataset: List<ArtistItemList>
