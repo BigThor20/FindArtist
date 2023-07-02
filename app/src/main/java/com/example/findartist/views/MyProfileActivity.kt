@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -85,6 +87,17 @@ class MyProfileActivity : AppCompatActivity() {
                 Log.e("FetchDB", "lastName doesn't exist for this user")
             }
         }
+
+        myProfileViewModel.getFieldValueFromCollection("users", "role", userId) { fieldValue ->
+            if (fieldValue == "USER") {
+                val artistSection = findViewById<LinearLayout>(R.id.artistSection)
+                artistSection.visibility = View.GONE
+            } else {
+                Log.i("Artist profile", "This is an artist")
+            }
+        }
+
+
         myProfileViewModel.getFieldValueFromCollection("users", "phone", userId) { fieldValue ->
             if (fieldValue != null) {
                 phoneTextView.text = fieldValue
@@ -162,6 +175,8 @@ class MyProfileActivity : AppCompatActivity() {
                 )
             }
         }
+
+
 
         FirebaseStorage.getInstance()
         // UPLOAD PHOTO

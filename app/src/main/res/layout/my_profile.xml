@@ -110,127 +110,142 @@
             </LinearLayout>
 
 
-
-            <!--            Phone SECTION-->
             <LinearLayout
                 android:layout_width="match_parent"
+                android:id="@+id/artistSection"
                 android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:padding="6dp"
-                    android:text="Your phone number:" />
-                <TextView
-                    android:id="@+id/MyPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="16dp"
-                    android:padding="6dp"
-                    android:text="none" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editProfilePhone"
-                    android:layout_width="0dp"
+                <!--            Phone SECTION-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/phoneSection"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp"
-                    android:inputType="text" />
+                    android:paddingBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/yourPhoneTextView"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:padding="6dp"
+                        android:text="Your phone number:" />
+                    <TextView
+                        android:id="@+id/MyPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:padding="6dp"
+                        android:text="none" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editProfilePhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="text" />
+
+                    <Button
+                        android:id="@+id/updatePhoneButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Update" />
+                </LinearLayout>
+                <!--            Description SECTION-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:padding="6dp"
+                        android:text="Your Description:" />
+                    <TextView
+                        android:id="@+id/MyDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:padding="6dp"
+                        android:text="none" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editProfileDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="text" />
+
+                    <Button
+                        android:id="@+id/updateDescriptionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Update" />
+                </LinearLayout>
+
+                <!--            ACTUAL PHOTO section-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:padding="6dp"
+                        android:text="Your profile photo:" />
+                    <ImageView
+                        android:id="@+id/actual_profile_photo"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <!--            New PHOTO section-->
 
                 <Button
-                    android:id="@+id/updatePhoneButton"
+                    android:id="@+id/buttonLoadPicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Update" />
-            </LinearLayout>
-            <!--            Description SECTION-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:padding="6dp"
-                    android:text="Your Description:" />
-                <TextView
-                    android:id="@+id/MyDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="16dp"
-                    android:padding="6dp"
-                    android:text="none" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:text="Upload new profile picture" />
 
-                <EditText
-                    android:id="@+id/editProfileDescription"
-                    android:layout_width="0dp"
+                <!--            MY PORTFOLIO SECTION-->
+                <fragment
+                    android:id="@+id/fragment_my_portfolio"
+                    android:name="com.example.findartist.views.MyPortfolioFragment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp"
-                    android:inputType="text" />
-
-                <Button
-                    android:id="@+id/updateDescriptionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Update" />
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
 
-            <!--            ACTUAL PHOTO section-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:padding="6dp"
-                    android:text="Your profile photo:" />
-                <ImageView
-                    android:id="@+id/actual_profile_photo"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1" />
 
-            </LinearLayout>
 
-            <!--            New PHOTO section-->
 
-            <Button
-                android:id="@+id/buttonLoadPicture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:text="Upload new profile picture" />
 
-<!--            MY PORTFOLIO SECTION-->
-            <fragment
-                android:id="@+id/fragment_my_portfolio"
-                android:name="com.example.findartist.views.MyPortfolioFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp" />
+
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
