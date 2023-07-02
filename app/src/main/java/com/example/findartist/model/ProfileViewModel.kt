@@ -38,6 +38,9 @@ class ProfileViewModel : ViewModel() {
                                 "rate" to rating.toString()
                             )
                             userDocRef.update("ratings", FieldValue.arrayUnion(ratingMap))
+                            CoroutineScope(Dispatchers.Main).launch {
+                                userDocRef.update("rate", getAvgRating(userId.toString()))
+                            }
                             Log.i("FirestoreDB", "Rating added successfully")
                         } else {
                             Log.i("FirestoreDB", "Rating already exists for this user")
