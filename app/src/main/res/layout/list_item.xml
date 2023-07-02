@@ -41,12 +41,20 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/list_item_job"
+                android:id="@+id/list_item_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Graphic Designer"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/list_item_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Graphic Designer"
+                    android:text="Cluj"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/list_item_rate"

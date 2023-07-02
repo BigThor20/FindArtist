@@ -36,6 +36,7 @@ class ItemAdapter(private val context: Context,
         val artistJob: TextView = view.findViewById(R.id.list_item_job)
         val artistRate: TextView = view.findViewById(R.id.list_item_rate)
         val artistDescription: TextView = view.findViewById(R.id.list_item_description)
+        val artistCity: TextView = view.findViewById(R.id.list_item_city)
 
         init {
             itemView.setOnClickListener {
@@ -62,6 +63,7 @@ class ItemAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
         val rating = "Rate: ${item.rate}/5"
+        val city = "City: ${item.city}"
         val name = item.firstName + " " + item.lastName
         // Utilizați Glide pentru a încărca imaginea de profil de la URL
         Glide.with(context)
@@ -73,6 +75,7 @@ class ItemAdapter(private val context: Context,
         holder.artistJob.text = item.job
         holder.artistRate.text = rating
         holder.artistDescription.text = item.description
+        holder.artistCity.text = city
     }
 
 
