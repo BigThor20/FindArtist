@@ -17,12 +17,12 @@
         android:paddingBottom="5dp"
         android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Use filters to find an artist"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use filters to find a worker"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
 
             <fragment

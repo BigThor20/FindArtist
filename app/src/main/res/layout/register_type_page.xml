@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="I'm an artist" />
+        android:text="I'm an worker" />
 
     <TextView
         android:layout_width="match_parent"

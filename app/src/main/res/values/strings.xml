@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FindArtist</string>
+    <string name="app_name">QuickFix</string>
     <string name="description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis odio ac felis pellentesque mollis. Praesent maximus tellus eget nisi hendrerit, ut bibendum velit facilisis. Etiam auctor, magna vitae feugiat rutrum, nunc libero consectetur ante, id sollicitudin purus ipsum at lorem.</string>
     <string name="name1">John Doe</string>
     <string name="name2">Emily Gomez</string>

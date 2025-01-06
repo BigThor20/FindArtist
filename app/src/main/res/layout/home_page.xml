@@ -16,8 +16,7 @@
 
 
         <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+            android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
@@ -26,39 +25,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ce este findArtist?"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="What is QuickFix?"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="16dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis odio ac felis pellentesque mollis. Praesent maximus tellus eget nisi hendrerit, ut bibendum velit facilisis. Etiam auctor, magna vitae feugiat rutrum, nunc libero consectetur ante, id sollicitudin purus ipsum at lorem."
+                android:padding="16dp"
+                android:text="We provide an intuitive app that connects customers with service providers across various fields, allowing users to search, filter, and book professionals based on reviews, availability, and proximity. The platform simplifies the process, ensures transparency, and fosters trust between clients and providers."
                 android:textColor="#000000"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:padding="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tipuri de artisti din platforma"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:padding="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis odio ac felis pellentesque mollis. Praesent maximus tellus eget nisi hendrerit, ut bibendum velit facilisis. Etiam auctor, magna vitae feugiat rutrum, nunc libero consectetur ante, id sollicitudin purus ipsum at lorem."
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:padding="16dp" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/goToLogin"
