@@ -1,18 +1,18 @@
 buildscript {
     repositories {
-        // Make sure that you have the following two repositories
-        google()  // Google's Maven repository
-        mavenCentral()  // Maven Central repository
+        google() // Google's Maven repository
+        mavenCentral() // Maven Central repository
     }
     dependencies {
-        // Add the dependency for the Google services Gradle plugin
         classpath 'com.google.gms:google-services:4.3.15'
     }
 }
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+
 android {
     namespace 'com.example.findartist'
     compileSdk 33
@@ -35,66 +35,79 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
     }
 
+    // Strategie de rezolvare a conflictelor de versiuni
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.test:core:1.5.0' // Forțare versiune corectă
+        }
+    }
 }
 
 dependencies {
-
+    // AndroidX și componente de bază
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.wear.tiles:tiles-material:1.2.0-alpha03'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
-    implementation 'androidx.test:core-ktx:1.4.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    // Import the Firebase BoM
+
+    // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    // ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    // ViewModel KTX
-    implementation 'androidx.activity:activity-ktx:1.7.0'
-    // LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    // Android lifecycle
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    // Coroutine lifecycle scopes
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1'
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.7'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:4.2.0'
-    testImplementation 'androidx.arch.core:core-testing:2.2.0'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-    androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
-    androidTestImplementation 'org.mockito:mockito-android:3.12.4'
-    androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-    androidTestImplementation 'androidx.test:core:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    implementation 'androidx.work:work-runtime-ktx:2.8.1'
     implementation 'com.google.firebase:firebase-core:20.0.0'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
 
+    // Android Lifecycle și LiveData
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1'
 
+    // Jetpack și alte componente
+    implementation 'androidx.activity:activity-ktx:1.7.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    // Glide pentru încărcare imagini
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // Kotlin Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    // Testare unitară
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:4.2.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+
+    // Testare Android
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
+    androidTestImplementation 'org.mockito:mockito-android:3.12.4'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 }
